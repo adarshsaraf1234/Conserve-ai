@@ -51,21 +51,11 @@ class Configuration:
         metadata={"description": "The system prompt used for generating routing response."},
     )
 
-    summarize_conversation_system_prompt: str = field(
-        default=prompts.SUMMARIZE_CONVERSATION_PROMPT,
-        metadata={"description": "The system prompt used for summarizing conversation."},
-    )
-
     routing_response_model: Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
         default="bedrock/anthropic.claude-3-haiku-20240307-v1:0",
         metadata={
             "description": "The language model used for generating routing responses. Should be in the form: provider/model-name."
         },
-    )
-
-    mcp_orchestrator_system_prompt: str = field(
-        default=prompts.MCP_ORCHESTRATOR_SYSTEM_PROMPT,
-        metadata={"description": "The system prompt used for MCP server orchestration."},
     )
 
     mcp_orchestrator_model: Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
@@ -82,11 +72,6 @@ class Configuration:
         },
     )
 
-    tool_refiner_prompt: str = field(
-        default=prompts.TOOL_REFINER_PROMPT,
-        metadata={"description": "The system prompt used for tool refining orchestration."},
-    )
-    
     @classmethod
     def from_runnable_config(
         cls: Type[T], config: Optional[RunnableConfig] = None

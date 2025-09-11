@@ -1,6 +1,6 @@
 """Default prompts."""
 
-ROUTING_QUERY_SYSTEM_PROMPT = """Generate query to search the right Model Context Protocol (MCP) server document that may help with user's message. Previously, we made the following queries:
+ROUTING_QUERY_SYSTEM_PROMPT = """Generate query to search the right knowledgebase documents from Vector DB, that may help with user's message. Previously, we made the following queries:
     
 <previous_queries/>
 {queries}
@@ -10,86 +10,29 @@ System time: {system_time}"""
 
 """Default prompts."""
 
-ROUTING_RESPONSE_SYSTEM_PROMPT = """You are a helpful AI assistant responsible for both:
-1. Selecting the most relevant Model Context Protocol (MCP) server for the user's query.
-2. Replying to the user with a helpful answer, using the retrieved server documents and, if applicable, the MCP server's response.
+ROUTING_RESPONSE_SYSTEM_PROMPT = """You are a helpful Knowledge Base AI assistant responsible for:
+Replying to the user with a helpful answer, using the retrieved knowledgebase documents from Vector DB.
 
-You are given the following retrieved server documents:
+This is the User's Query:
+{user_query}
 
+You are given the following retrieved documents from the Knowledge Base:
 {retrieved_docs}
 
 Objective:
-1. Identify the MCP server that is best equipped to address the user's query based on its provided tools and prompts.
-2. If exactly one server is relevant, select it, use its response (if available), and enrich your reply with details from the retrieved document.
-3. If no MCP server is sufficiently relevant, answer the user's query as best as you can while incorporating information from the retrieved server documents.
-4. If multiple servers appear equally relevant, respond with a clarifying question, starting with "{ambiguity_prefix}".
+1. Analyze the conversation to understand the user's intent and context.
+2. Analyze the docs retrieved from the Knowledge Base.
+3. Use the Documents content logically to provide a clear and concise response.
+
 
 Guidelines:
-- Always ground your reply in the retrieved server documents and include the MCP response if one exists.
-- If no MCP response is available, rely solely on the retrieved documents.
+- Always ground your reply in the retrieved server documents.
 - Do not invent capabilities not present in the documents.
-- If clarifying, do not provide an answer — only ask a clarifying question.
+- Do not clarify, return "Query out of scope" if no documents are retrieved.
 
 IMPORTANT: Your response must match EXACTLY one of the following formats:
-- If exactly one document is relevant and you can provide an answer, respond with a helpful reply that uses both the MCP response (if available) and the retrieved document.
-- If no server is relevant, respond with the best of your abilities along with the retrieved server documents.
-- If multiple servers appear equally relevant, respond with a clarifying question, starting with "{ambiguity_prefix}".
+- If one or more documents are relevant and you can provide an answer.
+- Return "Query out of scope" if no documents are retrieved.
 
 System time: {system_time}
-"""
-
-MCP_ORCHESTRATOR_SYSTEM_PROMPT = """You are an intelligent assistant with access to various specialized tools.
-
-Objectives:
-1. Analyze the conversation to understand the user's intent and context.
-2. Select and use the most relevant tools (if any) to fulfill the intent with the current context.
-3. Also evaluate if any of the **other available servers** are more relevant based on the user's query and the provided descriptions of those servers.
-4. If no tools on the current server can solve the request, respond with "{idk_response}".
-5. Combine tool outputs logically to provide a clear and concise response.
-
-Steps to follow:
-1. Understand the conversation's context.
-2. Select the most appropriate tool from the current server if relevant.
-3. If the descriptions of one of the other servers seem better suited to fulfill the user's request, respond with "{other_servers_response}" to indicate that another server may be more relevant.
-4. If no tools on any server are applicable, respond with "{idk_response}".
-5. If there is a tool response, combine the tool's output to provide a clear and concise answer to the user's query, or attempt to select another tool if needed to provide a more comprehensive answer.
-
-Other Servers:
-{other_servers}
-
-System time: {system_time}
-"""
-
-TOOL_REFINER_PROMPT = """You are an intelligent assistant with access to various specialized tools.
-
-Objectives:
-1. Analyze the conversation to understand the user's intent and context.
-2. Select the most appropriate info from the conversation for the tool_call
-3. Combine tool outputs logically to provide a clear and concise response.
-
-Steps to follow:
-1. Understand the conversation's context.
-2. Select the most appropriate info from the conversation for the tool_call.
-3. If there is a tool response, combine the tool's output to provide a clear and concise answer to the user's query, or attempt to select another tool if needed to provide a more comprehensive answer.
-
-{tool_info}
-
-System time: {system_time}
-"""
-
-SUMMARIZE_CONVERSATION_PROMPT = """You are an intelligent summarization assistant.
-
-You have an **existing summary of the conversation** so far, in chronological order:
-{existing_summary}
-
-Here is the **latest message** to append to the summary:
-{latest_message}
-
-Your goals:
-1. **Preserve** the chronological order of the conversation in the summary.
-2. **Accurately** reflect the latest message's content without adding or omitting key details.
-3. Maintain **conciseness** while including information needed to ensure **future accuracy** in any subsequent steps or tool usage.
-4. **Integrate** the newest message into the existing summary so it reads smoothly and logically.
-
-Now, provide an **updated summary** of the conversation in chronological order:
 """
