@@ -32,4 +32,4 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = ["langgraph_mcp"]
 [tool.setuptools.package-dir]
-"langgraph_mcp" = "src/langgraph_mcp"
+"langgraph_mcp" = "src/langgraph-knet"

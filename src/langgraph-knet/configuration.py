@@ -40,7 +40,7 @@ class Configuration:
     )
 
     summarize_conversation_model: Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
-        default="bedrock/openai.gpt-oss-120b-1:0",
+        default="bedrock/openai.gpt-oss-20b-1:0",
         metadata={
             "description": "The language model used for summarizing conversations. Should be in the form: provider/model-name."
         },
@@ -59,14 +59,14 @@ class Configuration:
     )
 
     mcp_orchestrator_model: Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
-        default="bedrock/openai.gpt-oss-120b-1:0",
+        default="bedrock/openai.gpt-oss-20b-1:0",
         metadata={
             "description": "The language model used for MCP server orchestration. Should be in the form: provider/model-name."
         },
     )
     
     tool_refiner_model: Annotated[str, {"__template_metadata__": {"kind": "llm"}}] = field(
-        default="bedrock/openai.gpt-oss-120b-1:0",
+        default="bedrock/openai.gpt-oss-20b-1:0",
         metadata={
             "description": "The language model used for rebinding the tool call. Should be in the form: provider/model-name."
         },

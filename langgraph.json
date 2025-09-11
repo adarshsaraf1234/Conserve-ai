@@ -1,8 +1,8 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "build_router_graph": "./src/langgraph_mcp/build_router_graph.py:graph",
-    "assistant_graph": "./src/langgraph_mcp/assistant_graph.py:graph"
+    "build_router_graph": "./src/langgraph-knet/build_router_graph.py:graph",
+    "assistant_graph": "./src/langgraph-knet/assistant_graph.py:graph"
   },
   "env": ".env"
 }
