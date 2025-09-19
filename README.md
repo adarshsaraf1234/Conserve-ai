@@ -1,5 +1,5 @@
-# K-NET KnowledBase
-A K-NET KnowledgeBase Agent based on Langgraph and Milvus VectorDB.
+# Conserve-AI
+Conserve-AI is an Agent based on Langgraph and Milvus VectorDB.
 
 ## Development Setup
 
@@ -7,7 +7,7 @@ A K-NET KnowledgeBase Agent based on Langgraph and Milvus VectorDB.
     ```bash
     git clone https://github.com/amany9000/k-net.git
     cd k-net
-    python3 -m venv .venv
+    python3 -m venv .venv (Python 3.13 is required to fulfill dependencies)
     source .venv/bin/activate
     ```
 
