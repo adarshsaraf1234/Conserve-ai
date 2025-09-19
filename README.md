@@ -5,7 +5,7 @@ Conserve-AI is an Agent based on Langgraph and Milvus VectorDB.
 
 1.  Create and activate a virtual environment
     ```bash
-    git clone https://github.com/amany9000/k-net.git
+    git clone https://github.com/adarshsaraf1234/Conserve-ai.git
     cd k-net
     python3 -m venv .venv (Python 3.13 is required to fulfill dependencies)
     source .venv/bin/activate
